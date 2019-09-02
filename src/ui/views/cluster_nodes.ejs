@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" href="imgs/icon/icon.png">
+    <link rel="stylesheet" href="css/uikit.min.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Holter.js</title>
+  </head>
+  <body>
+
+
+        <!-- start navbar -->
+        <%- include partials/navbar.ejs %>
+        <!-- end navbar -->
+
+        <!-- start the container -->
+        <div class="uk-container">
+
+            <div class="uk-child-width-1-1@s uk-grid-match" uk-grid>
+                <div class="uk-card uk-card-hover uk-card-body">
+                    <h3 class="uk-card-title">Cluster Nodes</h3>
+                    <table class="uk-table uk-table-divider">
+                        <thead>
+                              <tr>
+                                  <th></th>
+                                  <th>Name</th>
+                                  <th>Address</th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                  <td><i class="fa fa-circle success" aria-hidden="true"></i></th></td>
+                                <td>books</td>
+                                <td>http://localhost:3001/</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-circle success" aria-hidden="true"></i></th></td>
+                                <td>customers</td>
+                                <td>http://localhost:3002/</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fa fa-circle danger" aria-hidden="true"></i></th></td>
+                                <td>orders</td>
+                                <td>http://localhost:3003/</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+
+        </div>
+        <!-- end the container -->
+    <!-- js -->
+    <script type="text/javascript" src="js/uikit.min.js"></script>
+    <script type="text/javascript" src="js/uikit-icons.min.js"></script>
+  </body>
+</html>

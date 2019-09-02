@@ -13,13 +13,40 @@ require('./src/client/services_status/run');
 //     console.error(error);
 // })
 
+const ServicesRoute = require('./src/server/services/routes/services_route');
 
 const {client, redis} = require('./src/lib/redis-connection/client')({});
 
-const port = process.env.PORT || 3001;
-const app = require('express')();
+const bodyParser = require('body-parser');
+const path = require('path');
 
-var http = require('http');
+const port = process.env.PORT || 4600;
+const express = require('express');
+const app = express();
+
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+//static file path
+app.use(express.static(path.join(__dirname, '/src/ui/assets/')));
+
+//static file path
+// app.use(express.static(require("./_config_").project.images_path));
+
+// view engine setup
+app.set('views', [
+  path.join(__dirname, '/src/ui/views')
+]);
+
+// Set view engine as EJS
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'ejs');
+
+
+//  redis client connection events 
 
 client.on("error", function (error) {
     throw error;
@@ -27,8 +54,10 @@ client.on("error", function (error) {
 
 client.on("connect", function () {
     app.listen(port, () => {
-        console.log(`~holter.js~ running on port [:${port}]`);
+        console.log(`~holter.js~ running on port [::${port}]`);
     });
+
+    app.use('/', ServicesRoute);
 });
 
     // client.hmset("s1", 

@@ -1,0 +1,13 @@
+
+/* public */
+.success{
+  color: green
+}
+
+.danger{
+  color: red
+}
+
+.uk-card{
+  cursor: pointer;
+}
