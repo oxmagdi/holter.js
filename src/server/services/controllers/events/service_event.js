@@ -1,5 +1,5 @@
 const events = require("events")
-const eventEmitter = new events.EventEmitter().setMaxListeners(Infinity)
+const eventEmitter = new events.EventEmitter()
 
 
-module.exports = eventEmitter
+module.exports = eventEmitter.setMaxListeners(Infinity)

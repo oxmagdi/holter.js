@@ -15,7 +15,9 @@ require('./src/client/services_status/run');
 
 const ServicesRoute = require('./src/server/services/routes/services_route');
 
-const {client, redis} = require('./src/lib/redis-connection/client')({});
+const {client, redis} = require('./src/libs/redis/connection/client')({});
+
+const logger = require('./src/libs/logger/logger')
 
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -47,41 +49,15 @@ app.set('view engine', 'ejs');
 
 
 //  redis client connection events 
-
 client.on("error", function (error) {
     throw error;
 });
 
 client.on("connect", function () {
+    logger.info('-connected to the client-');
     app.listen(port, () => {
-        console.log(`~holter.js~ running on port [::${port}]`);
+        logger.info(`~holter.js~ running on port [::${port}]`);
     });
 
     app.use('/', ServicesRoute);
 });
-
-    // client.hmset("s1", 
-    //           "name", "books", 
-    //           "addr", "http://127.0.0.1:3001", 
-    //           "status", "active", 
-    //           function (err, res) {
-    //          if(err) throw err;
-    //          console.log(res);
-    //          client.hgetall("s1", (err, obj) => {
-    //                if(err) throw err;
-    //                console.log(obj)
-    //                client.del('s1')
-    //          });
-
-    // });
-    
-    // client.HMSET('s1', {
-    //     name : "abcdefghij", // NOTE: key and value will be coerced to strings
-    //     addr : "a type of value"
-    // }, (err, res) => {
-    //     console.log(res)
-    //     client.hgetall('s1', (err, res) => {
-    //         console.log(res)
-    //     })
-    // });
-

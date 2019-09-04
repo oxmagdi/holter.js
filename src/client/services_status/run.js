@@ -2,6 +2,9 @@ const check_status = require('./check_status');
 const read_filesname = require('./read_filesname');
 const read_conf = require('./read_conf');
 const serviceEventEmitter = require('../../server/services/controllers/events/service_event')
+const logger = require('../../libs/logger/logger')
+
+
 
  let interval = setInterval(function(){ 
     
@@ -18,16 +21,16 @@ const serviceEventEmitter = require('../../server/services/controllers/events/se
                     check_status(opt, (err) => {
                         // console.log(err)
                         if(err){
-                             console.error(conf.name + ' :: Dead');
+                             logger.info(`${ conf.name }  :: Dead`);
                              serviceEventEmitter.emit('sicc', {node: conf.name, alive: false})
                         } else {
-                             console.log(conf.name + ' :: Alive')    
+                             logger.info(`${conf.name} :: Alive`)    
                         }
                     });
 
-                }).catch(error => console.error(error.message));
+                }).catch(error => logger.error(error.message));
             });
         }
-    }).catch(error => console.error(error.message));
+    }).catch(error => logger.error(error.message));
 
-    }, 5000);
+    }, 10000);
