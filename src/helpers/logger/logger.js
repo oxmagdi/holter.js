@@ -2,7 +2,7 @@ const pino = require('pino')
 const config = require('../../../config/conf')
 
 const logger = pino({
-  enabled:  config.app.logger.logs,
+  enabled:  config.logger.enabled,
   prettyPrint: { 
     colorize: true,
     levelFirst: true,
