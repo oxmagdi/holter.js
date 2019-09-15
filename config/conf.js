@@ -12,6 +12,8 @@ module.exports = {
 
 	// redis
 	redis: {
-
+		host   : process.env.REDIS_HOST,
+		port   : process.env.REDIS_PORT,
+		prefix : process.env.REDIS_PREFIX
 	},
 }
