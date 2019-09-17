@@ -11,7 +11,7 @@ module.exports.addOne = ($node) => {
                 "port"      : $node['port'],
                 "path"      : $node['path'],
                 "interval"  : $node['interval'],
-                "onfailure" : JSON.stringify($node['onfailure'])
+                "onfailure" : $node['onfailure'] ? JSON.stringify($node['onfailure']) : 'NON'
             }, (error, reply) => {
                 if(error) reject(error)
                 resolve()
@@ -62,6 +62,23 @@ module.exports.getAllKeys = () => {
         client.keys(`${ client['options']['prefix'] }*`, (error, reply) => {
             if (error) reject(error)
             resolve(reply)
+        })
+    })
+}
+
+module.exports.clear = () => {
+    return new Promise( (resolve, reject) => {
+        client.keys(`${ client['options']['prefix'] }*`, (error, reply) => {
+            if (error) reject(error)
+            else if (reply.length > 0){
+              reply.forEach((key, index, array) => {
+                 let rkey = key.replace(client['options']['prefix'], '')
+                 client.DEL(rkey, (error, reply) => {
+                      if (error) reject(error)
+                      if(index == array.length -1) resolve(1)
+                  })
+              })
+            }else resolve(3)
         })
     })
 }

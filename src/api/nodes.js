@@ -1,9 +1,9 @@
 const router = require('express').Router()
 
-const GetAllServices = require('../controllers/get_all_services.js') 
+const GetAllServices = require('../server/services/controllers/get_all_services.js') 
 
 const SSE = require('sse-nodejs')
-const serviceEventEmitter = require('../controllers/events/service_event')
+const serviceEventEmitter = require('../server/services/controllers/events/service_event')
 
 router.get('/', (req, res, next) => {
     res.render('services');

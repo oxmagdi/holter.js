@@ -1,33 +1,36 @@
 
 const envConfigs = require('../../config/conf')
+const logger = require('../helpers/logger/logger')
 const fs = require('fs')
 const NodeModel = require('../models/NodeModel')
 
 class ConfigsReader {
 
-    constructor(dirname) { this.dirname = dirname }
+    constructor(dirname) { 
+        this.dirname = dirname      
+    }
 
     setConfigs () {
         return new Promise((resolve, reject) => {
-            this.getFilesNames().then(fielsname => {
-                let configs = []
-                fielsname.forEach((filename, index, array) => {
-                    this.getFileContent(filename).then(conf => {
-                        configs.push(conf)
-                        NodeModel.addOne(conf).then(reply => {
+            NodeModel.clear()
+            .then(r => {logger.info(`redis reset with status ${r}...`)
+                this.getFilesNames().then(fielsname => {
+                    logger.info(fielsname)
+                    let configs = []
+                    fielsname.forEach((filename, index, array) => {
+                        this.getFileContent(filename).then(conf => {
+                            configs.push(conf)
 
-                        }).catch(error => reject(error) )
+                            NodeModel.addOne(conf).then(reply => {
 
-                        if (index == array.length -1) resolve(configs)
-                        // const opt = {
-                        //     method: 'HEAD', 
-                        //     host: conf.host, 
-                        //     port: parseInt(conf.port), 
-                        //     path: conf.path
-                        // }    
-                    }).catch(error => reject(error))
-                })
-            }).catch(error => reject(error))
+                            }).catch(error => reject(error) )
+
+                            if (index == array.length -1) resolve(configs)   
+                        }).catch(error => reject(error))
+                    })
+                }).catch(error => reject(error))
+            })
+            .catch(error => logger.error(error)) 
         })
     }
 
@@ -41,8 +44,7 @@ class ConfigsReader {
                     content.host &&
                     content.port &&
                     content.path &&
-                    content.interval &&
-                    content.onfailer
+                    content.interval
                 ){
                     resolve(content)
                 } else {

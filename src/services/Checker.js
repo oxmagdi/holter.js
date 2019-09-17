@@ -1,6 +1,7 @@
 const http = require('http')
 const NodeModel = require('../models/NodeModel')
 const logger = require('../helpers/logger/logger')
+const configReader = require('./ConfigsReader')
 
 class Checker {
     constructor() {}
@@ -8,6 +9,7 @@ class Checker {
     async check () {
       let interval = setInterval( async () => {
           const nodes = await NodeModel.getAll()
+          if(nodes.length > 0) console.log()
           for (const node of nodes) {
               try {
                   await this.seeStatus({
@@ -17,6 +19,7 @@ class Checker {
                     path: node.path
                   })
                   logger.info(`[${node.cluster}:${node.node}] : ALIVE`)
+                  
               } catch (error) {
                   // this node in critical case
                   logger.error(`[${node.cluster}:${node.node}] : ${error.message}`)

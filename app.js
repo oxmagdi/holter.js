@@ -57,6 +57,32 @@
 //     app.use('/', ServicesRoute)
 // })
 
+function draw() {
+  console.log(` __________________________________________________________________`)
+  console.log(`|                                                                  |`)
+  console.log(`|                         Holter.js                                |`)
+  console.log(`|__________________________________________________________________|`)
+  console.log(`|__________________________________________________________________|`)
+  console.log(`|     ..          ..          ..                  ..          ..   |`)
+  console.log(`|    .  .        .  .        .  .               .   .        .  .  |`)
+  console.log(`|   .    .      .    .      .    .             .     .      .    . |`)
+  console.log(`|------------------------------------------------------------------|`)
+  console.log(`|         .    .      .    .                          .    .       |`)
+  console.log(`|          .  .        .  .                            .  .        |`)
+  console.log(`|           ..          ..                              ..         |`)
+  console.log(`|__________________________________________________________________|`)
+  console.log(`|__________________________________________________________________|`)
+  console.log('')
 
+}
+async function run () {
+  try {
+    await draw()
+    await require('./src/services/ConfigsReader').setConfigs()
+    await require('./src/services/Checker').check()
+  } catch (error) {
+    console.log(error)
+  }
+}
 
-require('./src/services/Checker').check()
+run()
