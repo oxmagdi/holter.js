@@ -1,20 +1,22 @@
 
 const envConfigs = require('../../config/conf')
 const fs = require('fs')
+const NodeModel = require('../models/NodeModel')
 
 class ConfigsReader {
 
-    constructor(dirname) {
-        this.dirname = dirname
-    }
+    constructor(dirname) { this.dirname = dirname }
 
-    getConfigs () {
+    setConfigs () {
         return new Promise((resolve, reject) => {
             this.getFilesNames().then(fielsname => {
                 let configs = []
                 fielsname.forEach((filename, index, array) => {
                     this.getFileContent(filename).then(conf => {
                         configs.push(conf)
+                        NodeModel.addOne(conf).then(reply => {
+
+                        }).catch(error => reject(error) )
 
                         if (index == array.length -1) resolve(configs)
                         // const opt = {
@@ -35,10 +37,12 @@ class ConfigsReader {
                 const full_path = this.dirname + $file_name
                 const content = JSON.parse(fs.readFileSync(full_path))
                 if(
-                    content.name && 
+                    content.node && 
                     content.host &&
                     content.port &&
-                    content.path
+                    content.path &&
+                    content.interval &&
+                    content.onfailer
                 ){
                     resolve(content)
                 } else {
@@ -68,12 +72,12 @@ class ConfigsReader {
 }
 
 // export the class
-module.exports = ConfigsReader
+// module.exports = ConfigsReader
 
 
 // make instance object of this class
 let configsReader = new ConfigsReader(envConfigs.dirname)
 
 // export an object of this class
-module.exports.configsReader = configsReader
+module.exports = configsReader
 
