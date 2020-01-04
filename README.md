@@ -10,6 +10,15 @@ OR
 
 # Running
 
+## make sure you installed [Redis](https://redis.io/) and server is working 
+
+```
+$ redis-cli
+127.0.0.1:6379> ping
+PONG
+127.0.0.1:6379> 
+```
+
 ## Environment Variables:
 
 ```
