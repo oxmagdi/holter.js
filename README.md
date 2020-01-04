@@ -22,11 +22,11 @@ PONG
 ## Environment Variables:
 
 ```
-export PORT=4600
-export NODES_CONF_DIRENAME=/home/holterconfs/
-export REDIS_HOST=127.0.0.1
-export REDIS_PORT=6379
-export REDIS_PREFIX=holter1
+echo 'PORT=4600' >> .env
+echo 'NODES_CONF_DIRENAME=/home/holterconfs/' >> .env
+echo 'REDIS_HOST=127.0.0.1' >> .env
+echo 'REDIS_PORT=6379' >> .env
+echo 'REDIS_PREFIX=holter1' >> .env
 ```
 
 ## Development mode
