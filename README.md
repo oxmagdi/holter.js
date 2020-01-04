@@ -13,7 +13,7 @@ OR
 ## Environment Variables:
 
 ```
-export PORT= 4600
+export PORT=4600
 export NODES_CONF_DIRENAME=/home/holterconfs/
 export REDIS_HOST=127.0.0.1
 export REDIS_PORT=6379
