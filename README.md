@@ -10,7 +10,7 @@ OR
 
 # Running
 
-## make sure you installed [Redis](https://redis.io/) and server is working 
+## make sure you installed [Redis](https://redis.io/) and Redis server is working 
 
 ```
 $ redis-cli
