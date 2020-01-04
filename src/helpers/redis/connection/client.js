@@ -1,4 +1,4 @@
-const envConfigs = require('../../../../config/conf')
+const envConfigs = require('../../../config/conf')
 const redis = require("redis")
 let client = null;
 

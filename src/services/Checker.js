@@ -18,11 +18,12 @@ class Checker {
                     port: parseInt(node.port), 
                     path: node.path
                   })
-                  logger.info(`[${node.cluster}:${node.node}] : ALIVE`)
+                //   logger.info(node)
+                  logger.info(`[${node.cluster}:${node.node}] : ALIVE [${node.domain}:${node.port}]`)
                   
               } catch (error) {
                   // this node in critical case
-                  logger.error(`[${node.cluster}:${node.node}] : ${error.message}`)
+                  logger.error(`[${node.cluster}:${node.node}] : DIED [${error.message}]`)
               }
           }
       }, 3000)

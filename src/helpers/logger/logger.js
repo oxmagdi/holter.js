@@ -1,5 +1,5 @@
 const pino = require('pino')
-const config = require('../../../config/conf')
+const config = require('../../config/conf')
 
 const logger = pino({
   enabled:  config.logger.enabled,

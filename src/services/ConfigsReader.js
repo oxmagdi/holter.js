@@ -1,5 +1,5 @@
 
-const envConfigs = require('../../config/conf')
+const envConfigs = require('../config/conf')
 const logger = require('../helpers/logger/logger')
 const fs = require('fs')
 const NodeModel = require('../models/NodeModel')
