@@ -16,7 +16,7 @@ const app = express()
 
 let kue = require('kue')
 
-kue.app.listen(4601)
+kue.app.listen(envConfig.kue.port)
 
 
 // process all background jobs 
