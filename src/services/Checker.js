@@ -2,6 +2,7 @@ const http = require('http')
 const NodeModel = require('../models/NodeModel')
 const logger = require('../helpers/logger/logger')
 const configReader = require('./ConfigsReader')
+const critical = require('./Critical')
 
 class Checker {
     constructor() {}
@@ -18,15 +19,17 @@ class Checker {
                     port: parseInt(node.port), 
                     path: node.path
                   })
+                //   logger.info(typeof node)
                 //   logger.info(node)
                   logger.info(`[${node.cluster}:${node.node}] : ALIVE [${node.domain}:${node.port}]`)
                   
               } catch (error) {
                   // this node in critical case
                   logger.error(`[${node.cluster}:${node.node}] : DIED [${error.message}]`)
+                  critical.screech(node)
               }
           }
-      }, 3000)
+      }, 6000)
     }
 
     seeStatus ( opt ) {

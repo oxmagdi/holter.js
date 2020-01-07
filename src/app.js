@@ -1,61 +1,62 @@
-// // init env object
-// const envConfig = require('./config/conf')
+// init env object
+const envConfig = require('./config/conf')
 
-// // init dirname if not exist
-// require('./src/init/servcies_conf_dirname')
+const nodesRoute = require('./routes/nodes')
 
-// // see the status
-// require('./src/client/services_status/run')
+const {client, redis} = require('./helpers/redis/connection/client')({})
 
-// const ServicesRoute = require('./src/server/services/routes/services_route')
+const logger = require('./helpers/logger/logger')
 
-// const {client, redis} = require('./src/libs/redis/connection/client')({})
+const bodyParser = require('body-parser')
+const path = require('path')
 
-// const logger = require('./src/libs/logger/logger')
+const port = envConfig.port
+const express = require('express')
+const app = express()
 
-// const bodyParser = require('body-parser')
-// const path = require('path')
+let kue = require('kue')
 
-// const port = envConfig.port
-// const express = require('express')
-// const app = express()
+kue.app.listen(4601)
 
 
-// app.use(bodyParser.json())
-// app.use(bodyParser.urlencoded({
-//   extended: true
-// }))
+// process all background jobs 
+require('./subscribers/screech')
 
-// //static file path
-// app.use(express.static(path.join(__dirname, '/src/ui/assets/')))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+  extended: true
+}))
 
-// //static file path
-// // app.use(express.static(require("./_config_").project.images_path))
+//static file path
+app.use(express.static(path.join(__dirname, '/ui/assets/')))
 
-// // view engine setup
-// app.set('views', [
-//   path.join(__dirname, '/src/ui/views')
-// ])
+//static file path
+// app.use(express.static(require("./_config_").project.images_path))
 
-// // Set view engine as EJS
-// app.engine('html', require('ejs').renderFile)
-// app.set('view engine', 'ejs')
+// view engine setup
+app.set('views', [
+  path.join(__dirname, '/ui/views')
+])
+
+// Set view engine as EJS
+app.engine('html', require('ejs').renderFile)
+app.set('view engine', 'ejs')
 
 
-// //  redis client connection events 
-// client.on("error", function (error) {
-//     throw error
-// })
+//  redis client connection events 
+client.on("error", function (error) {
+    throw error
+})
 
-// client.on("connect", function () {
-//     logger.info('-connected to the client-')
-//     app.listen(port, () => {
-//         logger.info(`~holter.js~ running on port [::${port}]`)
-//     })
-
-//     // init routes
-//     app.use('/', ServicesRoute)
-// })
+client.on("connect", function () {
+    logger.info('-connected to the client-')
+    app.listen(port, () => {
+        logger.info(`~holter.js server~ running on port [::${port}]`)
+    })
+    
+    // init routes
+    app.use('/', nodesRoute)
+})
 
 function draw() {
   console.log(` _________________________________________________________________`)

@@ -1,6 +1,14 @@
 const queue = require('../jobs/queue')
 const critical = require('../services/Critical')
 
-queue.process('screech', (job, done) => {
-      critical(job.data).then( () =>  done() ).catch( error => done(error) )
+queue.process('callEndpoint', (job, done) => {
+      critical.callEndpoint()
+              .then(() => done())
+              .catch(error => done(error))
+})
+
+queue.process('runScript', (job, done) => {
+      critical.runScript()
+              .then(() => done())
+              .catch(error => done(error))
 })

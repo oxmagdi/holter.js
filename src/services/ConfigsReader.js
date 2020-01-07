@@ -14,21 +14,24 @@ class ConfigsReader {
         return new Promise((resolve, reject) => {
             NodeModel.clear()
             .then(r => {logger.info(`redis reset with status ${r}...`)
-                this.getFilesNames().then(fielsname => {
-                    logger.info(fielsname)
-                    let configs = []
-                    fielsname.forEach((filename, index, array) => {
-                        this.getFileContent(filename).then(conf => {
-                            configs.push(conf)
+                this.getFilesNames()
+                    .then(fielsname => {
+                        logger.info('Nodes :')
+                        console.table(fielsname)
+                        let configs = []
+                        fielsname.forEach((filename, index, array) => {
+                            this.getFileContent(filename)
+                                .then(conf => {
+                                    configs.push(conf)
 
-                            NodeModel.addOne(conf).then(reply => {
+                                    NodeModel.addOne(conf).then(reply => {
 
-                            }).catch(error => reject(error) )
+                                    }).catch(error => reject(error) )
 
-                            if (index == array.length -1) resolve(configs)   
-                        }).catch(error => reject(error))
-                    })
-                }).catch(error => reject(error))
+                                    if (index == array.length -1) resolve(configs)   
+                                }).catch(error => reject(error))
+                        })
+                    }).catch(error => reject(error))
             })
             .catch(error => logger.error(error)) 
         })
@@ -38,6 +41,7 @@ class ConfigsReader {
         return new Promise( (resolve, reject) => {
             try {
                 const full_path = this.dirname + $file_name
+                console.log(full_path)
                 const content = JSON.parse(fs.readFileSync(full_path))
                 if(
                     content.node && 
@@ -59,6 +63,9 @@ class ConfigsReader {
      getFilesNames () {
         return new Promise( (resolve, reject) => {
             try {
+                
+                // console.log(this.dirname)
+                // console.log(envConfigs.dirname)
 
                 const filenames = fs.readdirSync(this.dirname)
 

@@ -1,26 +1,42 @@
+const queue = require('../jobs/queue')
 
-class Critical {
-    constructor () {}
+function Critical() {}
 
-    onFail (node) {
-        return new Promise( (resolve, reject) => {
-                
-        })
-    }
-
-    callEndpoint () {
-        return new Promise( (resolve, reject) => {
-                
-        })
-    }
-
-    runScript () {
-        return new Promise( (resolve, reject) => {
-                
-        })
-    }
-
+Critical.prototype.screech = ($node) => {
+    return new Promise( (resolve, reject) => {
+        // console.log($node)
+        // console.log(typeof $node['onfailure'])
+        const typeNotNON = $node.onfailure != 'NON' || !Object.keys($node.onfailure).length
+        const onfailure =  typeNotNON ? JSON.parse($node['onfailure']) : 0
+        const type = typeNotNON ? onfailure.type : 'NON'
+          if(type == 'endpoint'){
+                let job = queue.create('callEndpoint', {...$node, onfailure, title: `${$node.cluster}.${$node.node} is down ..`})
+                               .save( function(err){
+                                   if( err ) reject( err )
+                                   else resolve( job.id )
+                                })
+          } else if(type == 'script'){
+                let job = queue.create('runScript', {...$node, onfailure, title: `${$node.cluster}.${$node.node} is down ..`})
+                            .save( function(err){
+                                if( err ) reject( err )
+                                else resolve( job.id )
+                            })
+          }
+    })
 }
 
-const c = new Critical()
-module.exports = c
+
+Critical.prototype.callEndpoint = () => {
+    return new Promise( (resolve, reject) => {
+            resolve()    
+    })
+}
+
+Critical.prototype.runScript = () => {
+    return new Promise( (resolve, reject) => {
+        resolve()     
+    })
+}
+
+
+module.exports = new Critical()

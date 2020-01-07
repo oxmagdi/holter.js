@@ -11,7 +11,7 @@ module.exports.addOne = ($node) => {
                 "port"      : $node['port'],
                 "path"      : $node['path'],
                 "interval"  : $node['interval'],
-                "onfailure" : $node['onfailure'] ? JSON.stringify($node['onfailure']) : 'NON'
+                "onfailure" : $node['onfailure'] && Object.keys($node['onfailure']).length ? JSON.stringify($node['onfailure']) : 'NON'
             }, (error, reply) => {
                 if(error) reject(error)
                 resolve()

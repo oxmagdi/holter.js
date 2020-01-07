@@ -48,14 +48,14 @@ echo 'REDIS_PREFIX=holter1' >> .env
     "port": "",
     "path": "",
     "interval": "",
-    "onfailer": {}
+    "onfailure": {}
 }
 ```
 
 ## onfailer type could be script or endpoint
 
 ```
-"onfailer": {
+"onfailure": {
     "type": "script",
     "path": ""
 }
@@ -64,7 +64,7 @@ echo 'REDIS_PREFIX=holter1' >> .env
 OR
 
 ``` 
-"onfailer": {
+"onfailure": {
     "type": "endpoint",
     "url": "",
     "method": "",
