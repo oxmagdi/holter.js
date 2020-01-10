@@ -2,8 +2,8 @@ const queue = require('../jobs/queue')
 const critical = require('../services/Critical')
 
 queue.process('callEndpoint', (job, done) => {
-      critical.callEndpoint()
-              .then(() => done())
+      critical.callEndpoint(job.data.onfailure)
+              .then((body) => done(null, body))
               .catch(error => done(error))
 })
 

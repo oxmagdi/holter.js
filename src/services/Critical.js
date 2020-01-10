@@ -1,4 +1,7 @@
+const request = require('request');
 const queue = require('../jobs/queue')
+
+/******************* */
 
 function Critical() {}
 
@@ -26,9 +29,12 @@ Critical.prototype.screech = ($node) => {
 }
 
 
-Critical.prototype.callEndpoint = () => {
+Critical.prototype.callEndpoint = (endpoint) => {
     return new Promise( (resolve, reject) => {
-            resolve()    
+        request(endpoint.url, { json: true, body: endpoint.body, }, (err, res, body) => {
+                if (err) reject(err)
+                else resolve(body)
+        });
     })
 }
 
