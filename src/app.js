@@ -52,6 +52,7 @@ client.on("connect", function () {
     logger.info('-connected to the client-')
     app.listen(port, () => {
         logger.info(`~holter.js server~ running on port [::${port}]`)
+        logger.info(`~kue~ running on port [::${envConfig.kue.port}]`)
     })
     
     // init routes

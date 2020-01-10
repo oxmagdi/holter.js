@@ -26,7 +26,7 @@ echo 'PORT=4600' >> .env
 echo 'NODES_CONF_DIRENAME=/home/holterconfs/' >> .env
 echo 'REDIS_HOST=127.0.0.1' >> .env
 echo 'REDIS_PORT=6379' >> .env
-echo 'REDIS_PREFIX=holter1' >> .env
+echo 'REDIS_PREFIX=h' >> .env
 ```
 
 ## Development mode

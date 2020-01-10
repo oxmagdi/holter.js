@@ -3,7 +3,7 @@ const {client, redis} = require('../helpers/redis/connection/client')({})
 module.exports.addOne = ($node) => {
     return new Promise( (resolve, reject) => {
        try {
-            client.HMSET(`${$node['cluster']}:${$node['node']}`,{
+            client.HMSET(`:${$node['cluster']}:${$node['node']}`,{
                 "cluster"   : $node['cluster'],
                 "node"      : $node['node'],
                 "status"    : '-1',
@@ -20,6 +20,34 @@ module.exports.addOne = ($node) => {
            reject(error)
        }
     })
+}
+
+module.exports.getStatus = ($key, $num) => {
+    return new Promise( (resolve, reject) => {
+        try {
+             client.hget($key, "status", (error, reply) => {
+                 if(error) reject(error)
+                 resolve(reply)
+             })
+        } catch (error) {
+            reject(error)
+        }
+     })
+}
+
+module.exports.upStatus = ($key, $num) => {
+    return new Promise( (resolve, reject) => {
+        try {
+             client.HMSET($key, { "status" : `${$num}`,} , (error, reply) => {
+                 if(error) reject(error)
+                 console.log(reply)
+                 console.log($key)
+                 resolve()
+             })
+        } catch (error) {
+            reject(error)
+        }
+     })
 }
 
 module.exports.getOne = ($node) => {

@@ -4,89 +4,77 @@ const logger = require('../helpers/logger/logger')
 const fs = require('fs')
 const NodeModel = require('../models/NodeModel')
 
-class ConfigsReader {
+/***************** */
 
-    constructor(dirname) { 
-        this.dirname = dirname      
-    }
-
-    setConfigs () {
-        return new Promise((resolve, reject) => {
-            NodeModel.clear()
-            .then(r => {logger.info(`redis reset with status ${r}...`)
-                this.getFilesNames()
-                    .then(fielsname => {
-                        logger.info('Nodes :')
-                        console.table(fielsname)
-                        let configs = []
-                        fielsname.forEach((filename, index, array) => {
-                            this.getFileContent(filename)
-                                .then(conf => {
-                                    configs.push(conf)
-
-                                    NodeModel.addOne(conf).then(reply => {
-
-                                    }).catch(error => reject(error) )
-
-                                    if (index == array.length -1) resolve(configs)   
-                                }).catch(error => reject(error))
-                        })
-                    }).catch(error => reject(error))
-            })
-            .catch(error => logger.error(error)) 
-        })
-    }
-
-    getFileContent ($file_name) {
-        return new Promise( (resolve, reject) => {
-            try {
-                const full_path = this.dirname + $file_name
-                console.log(full_path)
-                const content = JSON.parse(fs.readFileSync(full_path))
-                if(
-                    content.node && 
-                    content.host &&
-                    content.port &&
-                    content.path &&
-                    content.interval
-                ){
-                    resolve(content)
-                } else {
-                    reject(new Error('FORMAT FILE ERROR!'))
-                }
-            } catch (error) {
-               reject(error)
-            }
-        })
-     }
-
-     getFilesNames () {
-        return new Promise( (resolve, reject) => {
-            try {
-                
-                // console.log(this.dirname)
-                // console.log(envConfigs.dirname)
-
-                const filenames = fs.readdirSync(this.dirname)
-
-                if (filenames.length > 0) resolve(filenames) 
-                else reject(new Error('NO FILES FOUND IN DIRNAME!'))
-
-            } catch (error) {
-               reject(error)
-            }
-        })
-     }
-
+function ConfigsReader(dirname_param){
+    this.dirname = dirname_param
 }
 
-// export the class
-// module.exports = ConfigsReader
+ConfigsReader.prototype.setConfigs = async function() {
+
+    let r = await NodeModel.clear()
+    await logger.info(`redis reset with status ${r}...`)
+
+    let files_name = await this.getFilesNames()
+    console.log(files_name)
+    let configs = []
+
+    for(let fname of files_name) {
+        console.log(fname[0])
+        let conf = await this.getFileContent(fname)
+        await configs.push(conf)
+        await NodeModel.addOne(conf)
+    }
+
+    return configs
+    
+}
+
+
+ConfigsReader.prototype.getFileContent = function ($file_name) {
+    return new Promise((resolve, reject) => {
+        try {
+            const full_path = this.dirname + $file_name
+            console.log(full_path)
+            const content = JSON.parse(fs.readFileSync(full_path))
+            if(
+                content.node && 
+                content.host &&
+                content.port &&
+                content.path &&
+                content.interval
+            ){
+                resolve(content)
+            } else {
+                reject(new Error('FORMAT FILE ERROR!'))
+            }
+        } catch (error) {
+           reject(error)
+        }
+    })
+}
+
+ConfigsReader.prototype.getFilesNames = function() {
+    return new Promise((resolve, reject) => {
+        try {
+                
+            // console.log(this.dirname)
+            // console.log(envConfigs.dirname)
+
+            const filenames = fs.readdirSync(this.dirname)
+
+            if (filenames.length > 0) resolve(filenames) 
+            else reject(new Error('NO FILES FOUND IN DIRNAME!'))
+
+        } catch (error) {
+           reject(error)
+        }
+    })
+}
 
 
 // make instance object of this class
-let configsReader = new ConfigsReader(envConfigs.dirname)
-
+let cr = new ConfigsReader(envConfigs.dirname)
 // export an object of this class
-module.exports = configsReader
+module.exports = cr
 
