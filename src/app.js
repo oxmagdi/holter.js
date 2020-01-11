@@ -3,9 +3,9 @@ const envConfig = require('./config/conf')
 
 const nodesRoute = require('./routes/nodes')
 
-const {client, redis} = require('./helpers/redis/connection/client')({})
+const {client, redis} = require('./libs/redis/connection/client')({})
 
-const logger = require('./helpers/logger/logger')
+const logger = require('./libs/logger/logger')
 
 const bodyParser = require('body-parser')
 const path = require('path')
@@ -20,7 +20,7 @@ kue.app.listen(envConfig.kue.port)
 
 
 // process all background jobs 
-require('./subscribers/screech')
+require('./jobs/process')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
@@ -77,7 +77,9 @@ function draw() {
   console.log('')
 
 }
-async function run () {
+
+
+(async function run () {
   try {
     await draw()
     await require('./services/ConfigsReader').setConfigs()
@@ -85,6 +87,8 @@ async function run () {
   } catch (error) {
     console.log(error)
   }
-}
+})()
 
-run()
+
+
+module.exports = app

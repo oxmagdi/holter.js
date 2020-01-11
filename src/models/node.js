@@ -1,4 +1,4 @@
-const {client, redis} = require('../helpers/redis/connection/client')({})
+const {client, redis} = require('../libs/redis/connection/client')({})
 
 module.exports.addOne = ($node) => {
     return new Promise( (resolve, reject) => {

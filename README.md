@@ -57,7 +57,7 @@ echo 'REDIS_PREFIX=h' >> .env
 ```
 "onfailure": {
     "type": "script",
-    "path": ""
+    "command": ""
 }
 ```
 

@@ -1,8 +1,8 @@
 const http = require('http')
-const NodeModel = require('../models/NodeModel')
-const logger = require('../helpers/logger/logger')
+const NodeModel = require('../models/node')
+const logger = require('../libs/logger/logger')
 const configReader = require('./ConfigsReader')
-const critical = require('./Critical')
+const screech = require('../subscribers/screech')
 
 /*******************/
 
@@ -32,7 +32,7 @@ Checker.prototype.check = async function() {
                 const status = await NodeModel.getStatus(redisKey)
                 if(status == -1 || status == 1) {
                     await NodeModel.upStatus(redisKey, 0)
-                    await critical.screech(node)
+                    await screech(node)
                     logger.error(`[${node.cluster}:${node.node}] : DIED [${error.message}]`)
                 } else {
                    logger.error(`[${node.cluster}:${node.node}] : DIED [${error.message}]`)
