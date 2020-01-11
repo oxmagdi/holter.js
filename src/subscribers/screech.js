@@ -12,17 +12,21 @@ module.exports = ($node) => {
           const type = typeNotNON ? onfailure.type : 'NON'
 
           if(type == 'endpoint'){
+
                 let job = queue.create('callEndpoint', {...$node, onfailure, title: `${$node.cluster}.${$node.node} is down ..`})
                                .save( function(err){
                                    if( err ) reject( err )
                                    else resolve( job.id )
                                 })
+
           } else if(type == 'script'){
+
                 let job = queue.create('runScript', {...$node, onfailure, title: `${$node.cluster}.${$node.node} is down ..`})
                             .save( function(err){
                                 if( err ) reject( err )
                                 else resolve( job.id )
                             })
+                            
           }
     })
 }
