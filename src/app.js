@@ -82,8 +82,8 @@ function draw() {
 (async function run () {
   try {
     await draw()
-    await require('./services/ConfigsReader').setConfigs()
-    await require('./services/Checker').check()
+    await require('./controllers/ConfigsReader').setConfigs()
+    await require('./controllers/Checker').check()
   } catch (error) {
     console.log(error)
   }
