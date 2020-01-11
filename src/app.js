@@ -1,7 +1,7 @@
 // init env object
 const envConfig = require('./config/conf')
 
-const nodesRoute = require('./routes/nodes')
+const nodesRoute = require('./web/routes/nodes')
 
 const {client, redis} = require('./libs/redis/connection/client')({})
 
@@ -79,7 +79,7 @@ function draw() {
 }
 
 
-(async function run () {
+async function run () {
   try {
     await draw()
     await require('./controllers/ConfigsReader').setConfigs()
@@ -87,7 +87,9 @@ function draw() {
   } catch (error) {
     console.log(error)
   }
-})()
+}
+
+run()
 
 
 

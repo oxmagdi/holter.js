@@ -4,13 +4,12 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node src/app.js",
     "server": "node src/app.js",
     "dev": "nodemon src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "magdi <migzzawi@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.1",
