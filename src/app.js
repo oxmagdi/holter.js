@@ -28,14 +28,14 @@ app.use(bodyParser.urlencoded({
 }))
 
 //static file path
-app.use(express.static(path.join(__dirname, '/ui/assets/')))
+app.use(express.static(path.join(__dirname, '/web/ui/assets/')))
 
 //static file path
 // app.use(express.static(require("./_config_").project.images_path))
 
 // view engine setup
 app.set('views', [
-  path.join(__dirname, '/ui/views')
+  path.join(__dirname, '/web/ui/views')
 ])
 
 // Set view engine as EJS
