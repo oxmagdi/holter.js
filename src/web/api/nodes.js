@@ -1,6 +1,8 @@
 const router = require('express').Router()
 const nodesCtrl = require('../../controllers/Nodes')
 
+/******************************/
+
 router.get('/', (req, res) => {
     nodesCtrl.get_all_nodes()
      .then(nodes => {
@@ -24,4 +26,5 @@ router.get('/', (req, res) => {
      })
 })
 
+/******************************/
 module.exports = router

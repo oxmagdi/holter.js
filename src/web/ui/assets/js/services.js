@@ -25,7 +25,7 @@
        }
    }
    
-      fetch('/services', {
+      fetch('/api/nodes', {
         method:'GET',
         headers: {
           'Accept': 'application/json',
@@ -35,21 +35,21 @@
       .then((res) => res.json())
       .then((data) => {
 
-           if(data['services'].length > 0){
+           if(data['f_nodes'].length > 0){
 
-               var services = data.services;
+               var nodes = data['f_nodes'];
                var body = ``;
 
-               services.forEach((node, index, array) => {
-                    body += ` 
-                         <li id="${node}" data-running="true">
-                             <div class="uk-card uk-card-default uk-card-body uk-text-large">
-                                  <i class="fa fa-circle fa-xl success" aria-hidden="true"></i> ${ node }
-                             </div>
-                         </li>
-                    `;
+               nodes.forEach((node, index, array) => {
 
-                    if(index == array.length -1) 
+                   body += ` 
+                      <li id="${node.node}" data-running="true">
+                          <div class="uk-card uk-card-default uk-card-body uk-text-large">
+                              <i class="fa fa-circle fa-xl" style="color: ${ node.status == -1 ? 'orange' : nodes.status == 0 ? 'red': 'green'};" aria-hidden="true"></i> ${ node.node }
+                          </div>
+                      </li>
+                      `;
+                  if(index == array.length -1) 
                      document.getElementById('services_list').innerHTML = body;
                });
 
