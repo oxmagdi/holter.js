@@ -1,8 +1,16 @@
+const NodeModel = require('../models/node')
 
-class Nodes {
-    constructor() {}
+/***********************/
 
-    getConfigs () {}
+function Nodes(){}
 
-    getNodesStatus() {}
+Nodes.prototype.get_all_nodes = async () => {
+ return new Promise((resolve, reject) => {
+       NodeModel.getAll()
+        .then(nodes => resolve(nodes))
+        .catch(error => reject(error))
+ })    
 }
+
+/***********************/
+module.exports = new Nodes()

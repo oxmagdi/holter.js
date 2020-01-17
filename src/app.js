@@ -2,6 +2,7 @@
 const envConfig = require('./config/conf')
 
 const nodesRoute = require('./web/routes/nodes')
+const nodesApi = require('./web/api/nodes')
 
 const {client, redis} = require('./libs/redis/connection/client')({})
 
@@ -57,6 +58,7 @@ client.on("connect", function () {
     
     // init routes
     app.use('/', nodesRoute)
+    app.use('/api/nodes/', nodesApi)
 })
 
 function draw() {
