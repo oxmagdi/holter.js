@@ -16,11 +16,11 @@ ConfigsReader.prototype.setConfigs = async function() {
     await logger.info(`redis reset with status ${r}...`)
 
     let files_name = await this.getFilesNames()
-    console.log(files_name)
+    // console.log(files_name)
     let configs = []
 
     for(let fname of files_name) {
-        console.log(fname[0])
+        // console.log(fname[0])
         let conf = await this.getFileContent(fname)
         await configs.push(conf)
         await NodeModel.addOne(conf)
@@ -35,7 +35,7 @@ ConfigsReader.prototype.getFileContent = function ($file_name) {
     return new Promise((resolve, reject) => {
         try {
             const full_path = this.dirname + $file_name
-            console.log(full_path)
+            // console.log(full_path)
             const content = JSON.parse(fs.readFileSync(full_path))
             if(
                 content.node && 

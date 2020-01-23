@@ -40,8 +40,8 @@ module.exports.upStatus = ($key, $num) => {
         try {
              client.HMSET($key, { "status" : `${$num}`,} , (error, reply) => {
                  if(error) reject(error)
-                 console.log(reply)
-                 console.log($key)
+                //  console.log(reply)
+                //  console.log($key)
                  resolve()
              })
         } catch (error) {

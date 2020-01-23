@@ -3,6 +3,7 @@ const NodeModel = require('../models/node')
 const logger = require('../libs/logger/logger')
 const configReader = require('./ConfigsReader')
 const screech = require('../subscribers/screech')
+const eventEmitter = require('../subscribers/event_emitter')
 
 /*******************/
 
@@ -33,6 +34,7 @@ Checker.prototype.check = async function() {
                 if(status == -1 || status == 1) {
                     await NodeModel.upStatus(redisKey, 0)
                     await screech(node)
+                    await eventEmitter.emit('alteration')
                     logger.error(`[${node.cluster}:${node.node}] : DIED [${error.message}]`)
                 } else {
                    logger.error(`[${node.cluster}:${node.node}] : DIED [${error.message}]`)

@@ -38,6 +38,7 @@
            if(data['f_nodes'].length > 0){
 
                var nodes = data['f_nodes'];
+               console.log(nodes)
                var body = ``;
 
                nodes.forEach((node, index, array) => {
@@ -45,7 +46,7 @@
                    body += ` 
                       <li id="${node.node}" data-running="true">
                           <div class="uk-card uk-card-default uk-card-body uk-text-large">
-                              <i class="fa fa-circle fa-xl" style="color: ${ node.status == -1 ? 'orange' : nodes.status == 0 ? 'red': 'green'};" aria-hidden="true"></i> ${ node.node }
+                              <i class="fa fa-circle fa-xl" style="color: ${ node.status == -1 ? 'orange' : node.status == 0 ? 'red': 'green'};" aria-hidden="true"></i> ${ node.node }
                           </div>
                       </li>
                       `;
@@ -62,24 +63,26 @@
 
    console.log('second block!');
    
-   var eventSource = new EventSource('/services-see');
+   var eventSource = new EventSource('/api/events');
 
-   // eventSource.onmessage = function (event) {
-   // 	    console.log('onMessage ::', event);
-   // };
+//    eventSource.onmessage = function (event) {
+//    	    console.log('onMessage ::', event);
+//    };
 
-   // eventSource.onopen = function (event) {
-   // 	    console.log('onOpen ::', event);
-   // };
+//    eventSource.onopen = function (event) {
+//    	    console.log('onOpen ::', event);
+//    };
 
    eventSource.onerror = function (event) {
    	    console.log('onError ::', event);
    };
 
-   eventSource.addEventListener('critical', function (result) {
-         var service = JSON.parse(result.data);
-	    	console.log('Event Data :: ', service);
-         update_service(service);
+   eventSource.addEventListener('alteration', function (e) {
+         console.log('e : ', e)
+         console.log('e data : ', e.data)
+         var data = JSON.parse(e.data);
+	    	console.log('Event Data :: ', data);
+        //  update_service(service);
    });
 
 
