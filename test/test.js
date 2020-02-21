@@ -9,6 +9,7 @@ const chaiHttp = require('chai-http')
 const server = require('../src/app')
 const NodeModel = require('../src/models/node')
 const configsReader = require('../src/controllers/ConfigsReader')
+const checker = require('../src/controllers/Checker')
 
 chai.use(chaiHttp)
 
@@ -27,6 +28,18 @@ describe('Holter.js Unit Testing', () => {
           console.log()
           console.log()
     })
+
+    describe('See Status', () => {
+      it('it should return status 200', (done) => {
+        checker.seeStatus({
+          method: 'HEAD', 
+          host: 'www.google.com',
+          path: '/'
+        }).then(() => done()).catch(error => done(error))
+      })
+  })
+
+
 /*
   * Test the /GET route
   */
