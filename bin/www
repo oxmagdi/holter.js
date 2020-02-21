@@ -1,5 +1,13 @@
 #!/usr/bin/env node
 
+require('../src/app')
+
+const configsReader = require('../src/controllers/ConfigsReader')
+const checker = require('../src/controllers/Checker')
+
+/************************************************************************************* */
+
+
 function draw() {
   console.log(` _________________________________________________________________`)
   console.log(`|                                                                 |`)
@@ -19,15 +27,14 @@ function draw() {
 
 }
 
-
-async function run () {
+(async () => {
   try {
     await draw()
-    await require('../src/controllers/ConfigsReader').setConfigs()
-    await require('../src/controllers/Checker').check()
+    await configsReader.setConfigs()
+    await checker.check()
   } catch (error) {
     console.error(error)
   }
-}
-// 
-run()
+})()
+
+
