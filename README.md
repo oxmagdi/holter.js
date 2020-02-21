@@ -4,9 +4,6 @@
 
 ``` $ npm install ```
 
-OR
-
-``` $ npm i ```
 
 # Running
 
