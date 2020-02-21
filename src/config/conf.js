@@ -4,7 +4,7 @@ module.exports = {
 
 	port: process.env.PORT ? process.env.PORT : 4600,
 
-	dirname : process.env.NODES_CONF_DIRENAME,
+	dirname : process.env.NODES_CONF_DIRENAME || `${__dirname }/../../DEFAULT_CONF_DIR/`,
 	
 	logger: {
 		enabled: process.env.DEV_MODE == 'TEST' ? false : true , // process.env.LOGGER_ENABLED == 'ok' ? true : false
