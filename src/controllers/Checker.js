@@ -14,7 +14,7 @@ function Checker(){}
 Checker.prototype.check = async function() {
     let interval = setInterval( async () => {
         const nodes = await NodeModel.getAll()
-        if(nodes.length > 0) console.log()
+        if(nodes.length > 0) logger.info()
         for (const node of nodes) {
             let redisKey = `:${node.cluster}:${node.node}`
             try {

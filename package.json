@@ -4,9 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "server": "node ./bin/www",
-    "dev": "nodemon ./bin/www",
-    "test": "mocha --recursive --exit"
+    "server": "NODE_ENV=${NODE_ENV:=prod} node ./bin/www",
+    "dev": "NODE_ENV=${NODE_ENV:=dev} nodemon ./bin/www",
+    "test": "NODE_ENV=${NODE_ENV:=test} mocha --recursive --exit"
   },
   "keywords": [],
   "author": "magdi <migzzawi@gmail.com>",

@@ -6,3 +6,5 @@ dump.rdb
 
 push.sh
 *.sh
+
+DEFAULT_CONF_DIR

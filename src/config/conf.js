@@ -7,7 +7,7 @@ module.exports = {
 	dirname : process.env.NODES_CONF_DIRENAME || `${__dirname }/../../DEFAULT_CONF_DIR/`,
 	
 	logger: {
-		enabled: process.env.DEV_MODE == 'TEST' ? false : true , // process.env.LOGGER_ENABLED == 'ok' ? true : false
+		enabled: process.env.NODE_ENV == 'test' || process.env.NODE_ENV == 'prod' ? false : true , // process.env.LOGGER_ENABLED == 'ok' ? true : false
 	},
 
 	// redis

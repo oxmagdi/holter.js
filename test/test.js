@@ -1,4 +1,4 @@
-process.env.DEV_MODE = 'TEST'
+
 // reset config dir env var to test path
 process.env.NODES_CONF_DIRENAME = './test/conf_files/'
 
