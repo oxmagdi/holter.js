@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+
+function draw() {
+  console.log(` _________________________________________________________________`)
+  console.log(`|                                                                 |`)
+  console.log(`|                           Holter.js                             |`)
+  console.log(`|_________________________________________________________________|`)
+  console.log(`|_________________________________________________________________|`)
+  console.log(`|  ..          ..          ..                     ..          ..  |`)
+  console.log(`| .  .        .  .        .  .                  .   .        .  . |`)
+  console.log(`|.    .      .    .      .    .                .     .      .    .|`)
+  console.log(`|-----------------------------------------------------------------|`)
+  console.log(`|      .    .      .    .                             .    .      |`)
+  console.log(`|       .  .        .  .                               .  .       |`)
+  console.log(`|        ..          ..                                 ..        |`)
+  console.log(`|_________________________________________________________________|`)
+  console.log(`|_________________________________________________________________|`)
+  console.log('')
+
+}
+
+
+async function run () {
+  try {
+    await draw()
+    await require('../src/controllers/ConfigsReader').setConfigs()
+    await require('../src/controllers/Checker').check()
+  } catch (error) {
+    console.error(error)
+  }
+}
+// 
+run()

@@ -11,8 +11,8 @@ queue.process('callEndpoint', (job, done) => {
       
       const endpoint = job.data.onfailure
 
-      request(endpoint.url, { json: true, body: endpoint.body, }, (err, res, body) => {
-            if (err) done(error)
+      request(endpoint.url, { json: true, body: endpoint.body, }, (error, res, body) => {
+            if (error) done(error)
             else done(null, body)
       })
 })

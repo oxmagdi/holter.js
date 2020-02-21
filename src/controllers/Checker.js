@@ -1,10 +1,12 @@
+require('./ConfigsReader')
+
 const http = require('http')
 const NodeModel = require('../models/node')
-const logger = require('../libs/logger/logger')
-const configReader = require('./ConfigsReader')
+const logger = require('../libs/logger/logger') 
 const screech = require('../subscribers/screech')
 const eventEmitter = require('../subscribers/event_emitter')
 
+const INTERVAL_TIME = 1000
 /*******************/
 
 function Checker(){}
@@ -41,7 +43,7 @@ Checker.prototype.check = async function() {
                 }
             }
         }
-    }, 4500)
+    }, INTERVAL_TIME)
 }
 
 Checker.prototype.seeStatus = function(opt) {

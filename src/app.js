@@ -63,38 +63,4 @@ client.on("connect", function () {
     app.use('/api/events/', nodesEventsApi)
 })
 
-function draw() {
-  console.log(` _________________________________________________________________`)
-  console.log(`|                                                                 |`)
-  console.log(`|                           Holter.js                             |`)
-  console.log(`|_________________________________________________________________|`)
-  console.log(`|_________________________________________________________________|`)
-  console.log(`|  ..          ..          ..                     ..          ..  |`)
-  console.log(`| .  .        .  .        .  .                  .   .        .  . |`)
-  console.log(`|.    .      .    .      .    .                .     .      .    .|`)
-  console.log(`|-----------------------------------------------------------------|`)
-  console.log(`|      .    .      .    .                             .    .      |`)
-  console.log(`|       .  .        .  .                               .  .       |`)
-  console.log(`|        ..          ..                                 ..        |`)
-  console.log(`|_________________________________________________________________|`)
-  console.log(`|_________________________________________________________________|`)
-  console.log('')
-
-}
-
-
-async function run () {
-  try {
-    await draw()
-    await require('./controllers/ConfigsReader').setConfigs()
-    await require('./controllers/Checker').check()
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-run()
-
-
-
 module.exports = app
