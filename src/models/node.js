@@ -50,10 +50,10 @@ module.exports.upStatus = ($key, $num) => {
      })
 }
 
-module.exports.getOne = ($node) => {
+module.exports.getOne = ($nodeName) => {
    return new Promise( (resolve, reject) => {
          try {
-            client.hgetall($node, (error, reply) => {
+            client.hgetall($nodeName, (error, reply) => {
                 if(error) reject(error)
                 resolve(reply)
             })

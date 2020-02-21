@@ -1,3 +1,4 @@
+process.env.DEV_MODE = 'TEST'
 // reset config dir env var to test path
 process.env.NODES_CONF_DIRENAME = './test/conf_files/'
 
@@ -18,13 +19,11 @@ describe('Holter.js Unit Testing', () => {
 
           // clear redis
           const reply = await NodeModel.clear()
-          console.log("reply : ", reply)
-          console.log()
 
           // start reding node config from config dir (node_test.json)
           // then insert new node into redis
           const configs = await configsReader.setConfigs()
-          console.log("configs : ", configs.length)
+          console.log(`  reply: ${reply}, configs: ${ configs.length }`)
           console.log()
           console.log()
     })
@@ -47,12 +46,29 @@ describe('Holter.js Unit Testing', () => {
       })
   })
 
+
+  describe('GET /api/nodes/node_test', () => {
+    it('it should GET specific node', (done) => {
+        chai.request(server)
+        .get('/api/nodes/node_test')
+        .end((error, res) => {
+            if(error) done(error)
+            else{
+                res.body.should.be.a('object')
+                res.body.should.have.property('code').eql(200)
+                // res.body.should.have.property('f_nodes')
+                done()
+            }
+        })
+      })
+  })
+
   after(async () => {
     console.log()
     console.log()
     // clear redis
     const reply = await NodeModel.clear()
-    console.log("reply : ", reply)
+    console.log(`  reply: ${reply}`)
   })
 
 })
