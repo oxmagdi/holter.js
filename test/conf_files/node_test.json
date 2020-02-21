@@ -1,0 +1,15 @@
+{
+    "cluster": "microservcies",
+    "node": "node_test",
+    "host": "127.0.0.1",
+    "port": "3001",
+    "path": "/",
+    "interval": "5s",
+    "onfailure": {
+        "type": "endpoint",
+        "url": "http://127.0.0.1:3005/",
+        "method": "get",
+        "headers":{},
+        "body": {"msg": "books are down"}
+    }
+}

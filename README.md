@@ -28,6 +28,9 @@ echo 'REDIS_HOST=127.0.0.1' >> .env
 echo 'REDIS_PORT=6379' >> .env
 echo 'REDIS_PREFIX=h' >> .env
 ```
+## Unit Testing
+
+``` $ npm test ```
 
 ## Development mode
 
