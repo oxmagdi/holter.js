@@ -41,14 +41,14 @@ echo 'REDIS_PREFIX=h' >> .env
 
 ## There are two ways to add new node 
 
-## 1- Via UI
+### 1- Via UI
 
 ![UI](/src/web/ui/assets/imgs/addNNodeDash.png)
 
 
 
 
-## 2- Manually
+### 2- Manually
 
 #### Just make a new <FILE_NAME>.json on Configs Files Directory (the path You define it in Environment Variables as NODES_CONF_DIRENAME)
 
