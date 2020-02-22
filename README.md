@@ -38,7 +38,19 @@ echo 'REDIS_PREFIX=h' >> .env
 ``` $ npm run server ```
 
 # Add New Node Object
-### just make a new <FILE_NAME>.json file on configs files directory (the path You define it in Environment Variables as NODES_CONF_DIRENAME)
+
+## There are two ways to add new node 
+
+## 1- Via UI
+
+![UI](/src/web/ui/assets/imgs/addNNodeDash.png)
+
+
+
+
+## 2- Manually
+
+#### Just make a new <FILE_NAME>.json on Configs Files Directory (the path You define it in Environment Variables as NODES_CONF_DIRENAME)
 
 ```
 {
@@ -47,12 +59,11 @@ echo 'REDIS_PREFIX=h' >> .env
     "host": "",
     "port": "",
     "path": "",
-    "interval": "",
     "onfailure": {}
 }
 ```
 
-## onfailer type could be script or endpoint
+### onfailer.type could be Script 
 
 ```
 "onfailure": {
@@ -61,7 +72,7 @@ echo 'REDIS_PREFIX=h' >> .env
 }
 ```
 
-OR
+### OR Endpoint
 
 ``` 
 "onfailure": {
@@ -71,3 +82,6 @@ OR
     "headers":{},
     "body": {},
 }
+
+```
+
