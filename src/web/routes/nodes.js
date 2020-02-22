@@ -6,11 +6,11 @@ const router = require('express').Router()
 // const serviceEventEmitter = require('../server/services/controllers/events/service_event')
 
 router.get('/', (req, res, next) => {
-    res.render('services');
+    res.render('index', { pageName: 'home'});
 })
 
 router.get('/new-node', (req, res, next) => {
-    res.render('AddNewNode');
+    res.render('AddNewNode', { pageName: 'addNNode' });
 })
 
 // router.get('/services', (req, res, next) => {

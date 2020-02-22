@@ -3,29 +3,10 @@
 
 
 (() => {
-   
-   function fill_service_list (services){
-       if(services.length > 0) {
-
-         var body = ``;
-
-         services.forEach((s, index, array) => {
-
-             body += `
-                       <li data-running="${ s['alive'] }">
-                          <div class="uk-card uk-card-default uk-card-body uk-text-large">
-                               <i class="fa fa-circle fa-xl ${ s['alive'] ? 'success' : 'danger'}" aria-hidden="true"></i> ${ s.node }
-                          </div>
-                      </li>
-             `;  
-
-             if(index == array.length -1 ) 
-                document.getElementById('services_list').innerHTML = body;
-         });
-       }
-   }
-   
-      fetch('/api/nodes', {
+    fill_service_list();
+  
+    function fill_service_list (services){
+    fetch('/api/nodes', {
         method:'GET',
         headers: {
           'Accept': 'application/json',
@@ -56,6 +37,9 @@
 
            }
       });
+   }
+   
+     let interval = setInterval(fill_service_list, 2500);
 
 })();
 

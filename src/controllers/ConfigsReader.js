@@ -38,11 +38,11 @@ ConfigsReader.prototype.getFileContent = function ($file_name) {
             // console.log(full_path)
             const content = JSON.parse(fs.readFileSync(full_path))
             if(
-                content.node && 
-                content.host &&
-                content.port &&
-                content.path &&
-                content.interval
+                   content.node 
+                && content.host 
+                && content.port 
+                && content.path 
+                // && content.interval
             ){
                 resolve(content)
             } else {

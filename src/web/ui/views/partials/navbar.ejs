@@ -7,16 +7,14 @@
                 <a class="uk-navbar-item uk-logo" href="/"><i class="fa fa-heartbeat fa-2x" aria-hidden="true"></i></a>
 
                 <ul class="uk-navbar-nav">
-                    <li class="uk-active"><a href="#">Active</a></li>
-                    <li><a href="/new-node">Add New Node</a></li>
+                    <li <% if(pageName == "home"){ %>  class="uk-active" <% } %> ><a href="/">Home</a></li>
+                    <li <% if(pageName == "addNNode"){ %>  class="uk-active" <% } %> ><a href="/new-node">Add New Node</a></li>
                 </ul>
 
             </div>
 
             <div class="nav-overlay uk-navbar-right">
-
                 <a class="uk-navbar-toggle" uk-search-icon uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#"></a>
-
             </div>
 
             <div class="nav-overlay uk-navbar-left uk-flex-1" hidden>

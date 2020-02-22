@@ -33,6 +33,7 @@ var headerErr = document.getElementById('headerErr');
 
 initDisplayOnFailuer();
 
+
 onfailure.onchange = function(ev) {
     if(this.value == 'script') {
         displayCMD();
@@ -120,6 +121,7 @@ function getFormObject() {
         host: host.value,
         port: port.value,
         path: path.value,
+        onfailure:{}
     }
 
     if(onfailure.value == 'script') return {

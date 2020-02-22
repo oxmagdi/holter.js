@@ -6,7 +6,7 @@ const logger = require('../libs/logger/logger')
 const screech = require('../subscribers/screech')
 const eventEmitter = require('../subscribers/event_emitter')
 
-const INTERVAL_TIME = 4500
+const INTERVAL_TIME = 2000
 /*******************/
 
 function Checker(){}
