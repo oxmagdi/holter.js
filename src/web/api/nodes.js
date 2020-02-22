@@ -45,10 +45,14 @@ router.get('/:node', (req, res) => {
 
 router.post('/', (req, res) => {
         logger.info(`[POST /api/nodes/] with new node ->  ${req.body.cluster}:${req.body.node}`)
-        res.status(200).json({
-            code: 200,
-            body: req.body,
-        })
+        nodesCtrl.addOne(req.body).then(() => {
+            res.status(200).json({
+                code: 200,
+            })
+        }).catch(error => res.status(200).json({
+            code: 401,
+            error,
+        }))
 
 })
 

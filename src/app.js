@@ -1,5 +1,5 @@
 // init env object
-const envConfig = require('./config/conf')
+const config = require('./config/conf')
 
 const nodesRoute = require('./web/routes/nodes')
 const nodesApi = require('./web/api/nodes')
@@ -12,14 +12,12 @@ const logger = require('./libs/logger/logger')
 const bodyParser = require('body-parser')
 const path = require('path')
 
-const port = envConfig.port
 const express = require('express')
 const app = express()
 
 let kue = require('kue')
 
-kue.app.listen(envConfig.kue.port)
-
+kue.app.listen(config.kue.port)
 
 // process all background jobs 
 require('./jobs/process')
@@ -51,16 +49,13 @@ client.on("error", function (error) {
 })
 
 client.on("connect", function () {
-    logger.info('-connected to the client-')
-    app.listen(port, () => {
-        logger.info(`~holter.js server~ running on port [::${port}]`)
-        logger.info(`~kue~ running on port [::${envConfig.kue.port}]`)
-    })
-    
-    // init routes
-    app.use('/', nodesRoute)
-    app.use('/api/nodes/', nodesApi)
-    app.use('/api/events/', nodesEventsApi)
+    logger.info('-connected to the Redis client-')
 })
+
+
+// init routes
+app.use('/', nodesRoute)
+app.use('/api/nodes/', nodesApi)
+app.use('/api/events/', nodesEventsApi)
 
 module.exports = app

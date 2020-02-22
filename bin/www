@@ -1,11 +1,14 @@
 #!/usr/bin/env node
 
-require('../src/app')
+const app = require('../src/app')
+const config = require('../src/config/conf')
+const logger = require('../src/libs/logger/logger')
 
 const configsReader = require('../src/controllers/ConfigsReader')
 const checker = require('../src/controllers/Checker')
 
 /************************************************************************************* */
+
 
 
 function draw() {
@@ -32,6 +35,10 @@ function draw() {
     await draw()
     await configsReader.setConfigs()
     await checker.check()
+    app.listen(config.port, () => {
+      logger.info(`~kue~ running on port [::${config.kue.port}]`)
+      logger.info(`~holter.js server~ running on port [::${config.port}]`)
+    })
   } catch (error) {
     console.error(error)
   }

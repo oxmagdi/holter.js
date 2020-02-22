@@ -58,12 +58,29 @@ nodeForm.onsubmit = function(ev) {
         }).then((response) => response.json())
         .then((data) => {
             console.log('Success:', data);
+            UIkit.notification({
+                message: 'Node Added Successfuly',
+                status: 'primary',
+                pos: 'top-right',
+                timeout: 5000
+            });
         })
         .catch((error) => {
             console.error('Error:', error);
+            UIkit.notification({
+                message: 'Something goes Wrong!',
+                status: 'danger',
+                pos: 'top-right',
+                timeout: 5000
+            });
         });
     } else {
-        console.log("by");
+        UIkit.notification({
+            message: 'Something goes Wrong!',
+            status: 'danger',
+            pos: 'top-right',
+            timeout: 5000
+        });
     }
 };
 

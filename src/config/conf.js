@@ -17,7 +17,7 @@ module.exports = {
 		prefix : process.env.REDIS_PREFIX
 	},
 
-	// redis
+	// kue
 	kue: {
 		port   : process.env.KUE_PORT ? process.env.KUE_PORT : 4601 ,
 	},
