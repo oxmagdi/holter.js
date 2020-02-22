@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const nodesCtrl = require('../../controllers/Nodes')
+const logger = require('../../libs/logger/logger')
 
 /******************************/
 
@@ -39,6 +40,16 @@ router.get('/:node', (req, res) => {
             error,
         })
      })
+})
+
+
+router.post('/', (req, res) => {
+        logger.info(`[POST /api/nodes/] with new node ->  ${req.body.cluster}:${req.body.node}`)
+        res.status(200).json({
+            code: 200,
+            body: req.body,
+        })
+
 })
 
 /******************************/

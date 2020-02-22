@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" href="imgs/icon/icon.png">
+    <link rel="stylesheet" href="css/uikit.min.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/add_new_node.css">
+    <title>Holter.js</title>
+
+    <style>
+      .error{
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- start navbar -->
+    <%- include partials/navbar.ejs %>
+    <!-- end navbar -->
+
+   <div class="uk-container">
+
+    <form id="nodeForm" class="uk-grid-small" uk-grid>
+  
+          <legend class="uk-legend">Add New Node</legend>
+  
+          <div class="uk-width-1-2@s">
+              <label class="uk-form-label" for="">Node</label>
+              <input id="node" class="uk-input" type="text" placeholder="node name ..">
+              <span id="nodeErr" class="error"></span>
+          </div>
+
+          <div class="uk-width-1-2@s">
+            <label class="uk-form-label" for="">Cluster</label>
+            <input id="cluster" class="uk-input" type="text" placeholder="cluster name ..">
+            <span id="clusterErr" class="error"></span>
+          </div>
+
+          <div class="uk-width-1-3@s">
+            <label class="uk-form-label" for="">Host</label>
+            <input id="host" class="uk-input" type="text" placeholder="Ex: 127.0.0.1">
+            <span id="hostErr" class="error"></span>
+          </div>
+
+          <div class="uk-width-1-3@s">
+            <label class="uk-form-label" for="">Port</label>
+            <input id="port" class="uk-input" type="text" placeholder="Ex: 3000">
+            <span id="portErr" class="error"></span>
+          </div>
+
+          <div class="uk-width-1-3@s">
+            <label class="uk-form-label" for="">Path</label>
+            <input id="path" class="uk-input" type="text" placeholder="Ex: /feed">
+            <span id="pathErr" class="error"></span>
+          </div>
+
+          <div class="uk-width-1-1@s">
+            <label class="uk-form-label" for="form-stacked-select">On Failure</label>
+            <div class="uk-form-controls">
+                <select class="uk-select" id="onfailurOpt">
+                    <option>------</option>
+                    <option value="script">Script</option>
+                    <option value="endpoint">Endpoint</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="cmdC" class="uk-width-1-1@s">
+          <label class="uk-form-label" for="">Command</label>
+          <input id="cmd" class="uk-input" type="text" placeholder="Ex: bash <YOUR_BASH_FILE_PATH>.sh">
+            <span id="cmdErr" class="error"></span>
+        </div>
+
+        <div id="uriC" class="uk-width-1-1@s">
+          <label class="uk-form-label" for="">URI</label>
+          <input id="uri" class="uk-input" type="text" placeholder="Ex: http://<Your_DOMAIN>/send-email">
+            <span id="uriErr" class="error"></span>
+        </div>
+
+        <div id="methodC" class="uk-width-1-1@s">
+          <label class="uk-form-label" for="">Method</label>
+          <input id="method" class="uk-input" type="text" placeholder="Ex: GET">
+          <span id="methodErr" class="error"></span>
+        </div>
+
+        <div id="headerC" class="uk-width-1-1@s">
+          <label class="uk-form-label" for="">Header</label>
+          <textarea id="header" class="uk-textarea" rows="5" placeholder='Ex: {"Content-Type":"application/json", "Authorization": "Bearer <TOKEN>"}'></textarea>
+            <span id="headerErr" class="error"></span>
+        </div>
+
+        <div id="bodyC" class="uk-width-1-1@s">
+          <label class="uk-form-label" for="">Body</label>
+          <textarea id="body" class="uk-textarea" rows="5" placeholder='Ex: { "message":"node1 is down :(, do something." }'></textarea>
+          <span id="bodyErr" class="error"></span>
+        </div>
+
+
+        <div class="uk-width-1-1@s">
+          <button type="submit" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom">Done</button>
+        </div>
+
+
+  </form>
+
+   </div>
+
+
+   <!-- js -->
+   <script type="text/javascript" src="js/uikit.min.js"></script>
+   <script type="text/javascript" src="js/uikit-icons.min.js"></script>
+   <script type="text/javascript" src="js/add_new_node.js"></script>
+  </body>
+</html>

@@ -9,6 +9,10 @@ router.get('/', (req, res, next) => {
     res.render('services');
 })
 
+router.get('/new-node', (req, res, next) => {
+    res.render('AddNewNode');
+})
+
 // router.get('/services', (req, res, next) => {
 //     GetAllServices.get_all()
 //                   .then(services => {
