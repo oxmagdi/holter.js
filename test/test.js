@@ -23,11 +23,45 @@ describe('Holter.js Unit Testing', () => {
 
           // start reding node config from config dir (node_test.json)
           // then insert new node into redis
-          const configs = await configsReader.setConfigs()
-          console.log(`  reply: ${reply}, configs: ${ configs.length }`)
-          console.log()
-          console.log()
+          // const configs = await configsReader.setConfigs()
+          // console.log(`  reply: ${reply}, configs: ${ configs.length }`)
+          // console.log()
+          // console.log()
     })
+
+    /*
+  * Test the /GET route
+  */
+  describe('POST /api/nodes/', () => {
+    it('it should create new node', (done) => {
+      chai.request(server)
+      .post('/api/nodes/')
+      .set('Content-Type'  , 'application/json')
+      .send({
+          cluster: "microservcies",
+          node: "node_test",
+          host: "127.0.0.1",
+          port: "3001",
+          path: "/",
+          interval: "5s",
+          onfailure: {
+              type: "endpoint",
+              url: "http://127.0.0.1:3005/",
+              method: "get",
+              headers:{},
+              body: {"msg": "books are down"}
+          }
+      }).end((error, res) => {
+          if(error) done(error)
+          else{
+              res.body.should.be.a('object')
+              res.body.should.have.property('code').eql(200)
+              // res.body.should.have.property('f_nodes')
+              done()
+          }
+      })
+    })
+  })
 
     describe('See Status', () => {
       it('it should return status 200', (done) => {
