@@ -3,9 +3,26 @@
 
 
 (() => {
+    let interval;
+    document.getElementById('sync').onclick = function(ev) {
+        console.log(this.classList)
+        if(this.classList.contains('uk-button-primary')) {
+            this.classList.toggle("uk-button-danger");
+            this.classList.toggle("uk-button-primary");
+            clearInterval(interval)
+            console.log("Clear Interval!")
+        } else {
+             this.classList.toggle("uk-button-primary");
+             this.classList.toggle("uk-button-danger");
+
+             interval = setInterval(fill_service_list, 2500);
+            console.log("New Interval!")
+        }
+    };
+
     fill_service_list();
   
-    function fill_service_list (services){
+    function fill_service_list (){
     fetch('/api/nodes', {
         method:'GET',
         headers: {
@@ -38,8 +55,7 @@
            }
       });
    }
-   
-     let interval = setInterval(fill_service_list, 2500);
+
 
 })();
 
