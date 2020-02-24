@@ -50,7 +50,7 @@ echo 'REDIS_PREFIX=h' >> .env
 
 ### 2- Manually
 
-#### Just make a new <FILE_NAME>.json on Configs Files Directory (the path You define it in Environment Variables as NODES_CONF_DIRENAME)
+#### Just make a new <NODE_NAME>.json on Configs Files Directory (the path You define it in Environment Variables as NODES_CONF_DIRENAME)
 
 ```
 {
