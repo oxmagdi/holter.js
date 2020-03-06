@@ -20,7 +20,7 @@ Checker.prototype.check = async function() {
             try {
                 await this.seeStatus({
                     method: 'HEAD',
-                    host: node.host,
+                    host: node.domain,
                     port: parseInt(node.port),
                     path: node.path
                 })
