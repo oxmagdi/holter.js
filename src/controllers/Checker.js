@@ -48,10 +48,10 @@ Checker.prototype.check = async function() {
 
 Checker.prototype.seeStatus = function(opt) {
     return new Promise((resolve, reject) => {
-        console.log("opt : ", opt)
+        // console.log("opt : ", opt)
         var options = opt,
             request = http.request(options, function(req) {
-                console.log("REQ: ", req)
+                // console.log("REQ: ", req)
                 resolve()
             })
 
